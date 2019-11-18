@@ -427,15 +427,11 @@ public class StackPresenter {
         if (options.background.color.hasValue()) topBar.setBackgroundColor(options.background.color.get());
 
         if (options.background.component.hasValue()) {
-            if (backgroundControllers.containsKey(component)) {
-                topBar.setBackgroundComponent(backgroundControllers.get(component).getView());
-            } else {
-                TopBarBackgroundViewController controller = new TopBarBackgroundViewController(activity, topBarBackgroundViewCreator);
-                backgroundControllers.put(component, controller);
-                controller.setComponent(options.background.component);
-                controller.getView().setLayoutParams(new RelativeLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
-                topBar.setBackgroundComponent(controller.getView());
-            }
+            TopBarBackgroundViewController controller = new TopBarBackgroundViewController(activity, topBarBackgroundViewCreator);
+            backgroundControllers.put(component, controller);
+            controller.setComponent(options.background.component);
+            controller.getView().setLayoutParams(new RelativeLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
+            topBar.setBackgroundComponent(controller.getView());
         }
 
         if (options.testId.hasValue()) topBar.setTestId(options.testId.get());
